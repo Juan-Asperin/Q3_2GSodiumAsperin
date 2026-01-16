@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Q3 2nd Graded Exercise</h1>
@@ -11,21 +12,21 @@
     <form action="submit" method="post" id="studentForm">
         <fieldset>
             <br><label for="studentID">Student ID:</label>
-            <input type="number" id="studentID" placeholder="Student ID" required><br><br>
+            <input type="number" id="studentID" placeholder="Student ID" required onblur="noGivenInput(this)"><br><br>
             <label for="fName">Full Name:</label>
-            <input type="text" id="fName" placeholder="SURNAME, First Name M.I." required><br><br>
+            <input type="text" id="fName" placeholder="SURNAME, First Name M.I." required onblur="noGivenInput(this)"><br><br>
             <label for="bDay">Birthday:</label>
-            <input type="date" id="bDay" placeholder="Birthday" required><br><br>
+            <input type="date" id="bDay" placeholder="Birthday" required onblur="noGivenInput(this)"><br><br>
             <label for="eMail">Email Address:</label>
-            <input type="email" id="eMail" placeholder="user@example.com" required><br><br>
-        </fieldset><br>
+            <input type="email" id="eMail" placeholder="user@example.com" required onblur="noGivenInput(this)"><br><br>
+        </fieldset>
 
         <fieldset>
             <br><label for="mNumber">Mobile Number:</label>
-            <input type="text" id="mNumber" placeholder="Mobile Number" required><br><br>
+            <input type="text" id="mNumber" placeholder="Mobile Number" required onblur="noGivenInput(this)"><br><br>
 
             <label for="gLevel">Grade Level:</label>
-            <select id="gLevel" required>
+            <select id="gLevel" required onblur="noGivenInput(this)">
                 <option value="" disabled selected hidden>Select grade level</option>
                 <option value="g7">Grade 7</option>
                 <option value="g8">Grade 8</option>
@@ -35,13 +36,13 @@
                 <option value="g12">Grade 12</option>
             </select><br><br>
 
-            <input type="radio" id="intern" required>
+            <input type="radio" id="intern" name="internExtern" required>
             <label for="intern">Intern</label>
-            <input type="radio" id="extern" required>
+            <input type="radio" id="extern" name="internExtern" required>
             <label for="Extern">Extern</label><br><br>
 
             <label for="preferredOrganization">Preferred Organization:</label>
-            <select id="preferredOrganization" required>
+            <select id="preferredOrganization" required onblur="noGivenInput(this)">
                 <option value="" disabled selected hidden>Select organization</option>
                 <option value="labuyo">Labuyo</option>
                 <option value="alianti">Alianti</option>
@@ -49,12 +50,12 @@
                 <option value="flux">Flux</option>
                 <option value="celluloid">Celluloid</option>
             </select><br><br>
-        </fieldset><br><br>
+        </fieldset>
 
         <fieldset>
             <legend>Why do you want to join this organization?</legend>
-            <br><textarea id="reasonText" rows="10" cols="50" placeholder="Type your reason here..." required></textarea><br><br>
-            <button type="submit">Submit</button><br><br>
+            <br><textarea id="reasonText" placeholder="Type your reason here..." required onblur="noGivenInput(this)"></textarea><br><br>
+            <button type="submit">Submit</button>
             <button type="reset">Reset</button>
         </fieldset>
     </form>
@@ -88,6 +89,15 @@
                 alert("Form reset cancelled.");
             }
         });
+
+        function noGivenInput(el) {
+            if (el.value.trim() === "") {
+                el.classList.add("empty");
+            }
+            else {
+                el.classList.remove("empty");
+            }
+        }
     </script>
 </body>
 </html>

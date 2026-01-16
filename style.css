@@ -1,0 +1,93 @@
+input {
+    border: none;
+    border-bottom: 2px solid grey;
+    transition: border-color 0.3s ease-in-out;
+}
+
+textarea {
+    field-sizing: content;
+    min-height: 1lh;
+    max-height: 10lh;
+    min-width: 50ch;
+    overflow-y: none;
+    resize: none;
+    border: none;
+    border-bottom: 2px solid grey;
+    transition: border-color 0.3s ease-in-out;
+}
+
+select {
+    border: none;
+    border-bottom: 2px solid grey;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-bottom-color: green;
+}
+
+input:not(:focus):not(.empty), textarea:not(:focus):not(.empty), select:not(:focus):not(.empty) {
+    border-bottom-color: grey;
+}
+
+.empty {
+    outline: none;
+    border-bottom-color: red !important;
+}
+
+.empty::placeholder {
+    color: red;
+}
+
+fieldset {
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px;
+    border: none;
+    background-color: white;
+}
+
+fieldset:has(.empty) {
+    border-color: red;
+}
+
+form {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: green;
+}
+
+body {
+    background-color: lightgreen;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input, textarea {
+    background-color: transparent;
+    font-size: 1em;
+}
+
+input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid grey;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked {
+    border-color: green;
+    background: radial-gradient(circle, green 40%, transparent 40%);
+}
+
+input[type="radio"]:not(:checked) {
+    border-color: grey;
+    background: transparent;
+}
