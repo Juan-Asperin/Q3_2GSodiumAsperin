@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Sign-Ups</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>View Sign-Ups</h1>
+    <a href="index.html">Back to Sign-Up Form</a><br>
+
+    <div>
+        <label for="club">Select your club:</label>
+        <select id="club" name="club">
+            <option value="" disabled selected hidden>Select organization</option>
+            <option value="All">All</option>
+            <option value="Labuyo">Labuyo</option>
+            <option value="Alianti">Alianti</option>
+            <option value="Ellipsis">Ellipsis</option>
+            <option value="Flux">Flux</option>
+            <option value="Celluloid">Celluloid</option>
+        </select>
+    </div><br>
+
+    <div>
+        <table style="border: 1px solid black">
+            <thead>
+                <tr>
+                    <th>Club</th>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Grade</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Intern/Extern</th>
+                </tr>
+            </thead>
+            <tbody id="signUpTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const columns = [
+            "preferredOrganization",
+            "studentID",
+            "fullName",
+            "gradeLevel",
+            "email",
+            "mobileNumber",
+            "internExtern"
+        ];
+        const tableBody = document.getElementById("signUpTableBody");
+        const signUps = JSON.parse(localStorage.getItem("signUps")) || [];
+        const orgSelect = document.getElementById("club");
+
+        orgSelect.addEventListener("change", function() {
+            const selectedOrg = this.value;
+            let filteredSignUps = signUps;
+
+            if (selectedOrg !== "All") {
+                filteredSignUps = signUps.filter(signUp => signUp.preferredOrganization === selectedOrg);
+            }
+
+            renderSignUps(filteredSignUps);
+        });
+
+        function renderSignUps(signUps) {
+            tableBody.innerHTML = ""; // Clear existing rows
+            signUps.forEach(signUp => {
+                const row = document.createElement("tr");
+
+                columns.forEach(key => {
+                    const cell = document.createElement("td");
+                    cell.textContent = signUp[key] ?? ""; // safe fallback
+                    row.appendChild(cell);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        renderSignUps(signUps);
+    </script>
+</body>
+</html>

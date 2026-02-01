@@ -91,3 +91,41 @@ input[type="radio"]:not(:checked) {
     border-color: grey;
     background: transparent;
 }
+
+div {
+    display: flex;
+    justify-self: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+th {
+    border: 1px solid black;
+    padding: 8px;
+    background-color: green;
+    color: white;
+}
+
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+  background-color: green;
+  color: white;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: white;
+  color: black;
+}
+
+a {
+    display: block;
+    text-align: center;
+}

@@ -8,53 +8,54 @@
 </head>
 <body>
     <h1>Q3 2nd Graded Exercise</h1>
+    <a href="viewSignUps.html">View Sign-Ups</a>
 
-    <form action="submit" method="post" id="studentForm">
+    <form method="post" id="studentForm">
         <fieldset>
             <br><label for="studentID">Student ID:</label>
-            <input type="number" id="studentID" placeholder="Student ID" required onblur="noGivenInput(this)"><br><br>
+            <input type="number" id="studentID" placeholder="Student ID" required onblur="noGivenInput(this)" name="studentID"><br><br>
             <label for="fName">Full Name:</label>
-            <input type="text" id="fName" placeholder="SURNAME, First Name M.I." required onblur="noGivenInput(this)"><br><br>
+            <input type="text" id="fName" placeholder="SURNAME, First Name M.I." required onblur="noGivenInput(this)" name="fullName"><br><br>
             <label for="bDay">Birthday:</label>
-            <input type="date" id="bDay" placeholder="Birthday" required onblur="noGivenInput(this)"><br><br>
+            <input type="date" id="bDay" placeholder="Birthday" required onblur="noGivenInput(this)" name="birthday"><br><br>
             <label for="eMail">Email Address:</label>
-            <input type="email" id="eMail" placeholder="user@example.com" required onblur="noGivenInput(this)"><br><br>
+            <input type="email" id="eMail" placeholder="user@example.com" required onblur="noGivenInput(this)" name="email"><br><br>
         </fieldset>
 
         <fieldset>
             <br><label for="mNumber">Mobile Number:</label>
-            <input type="text" id="mNumber" placeholder="Mobile Number" required onblur="noGivenInput(this)"><br><br>
+            <input type="text" id="mNumber" placeholder="Mobile Number" required onblur="noGivenInput(this)" name="mobileNumber"><br><br>
 
             <label for="gLevel">Grade Level:</label>
-            <select id="gLevel" required onblur="noGivenInput(this)">
+            <select id="gLevel" required onblur="noGivenInput(this)" name="gradeLevel">
                 <option value="" disabled selected hidden>Select grade level</option>
-                <option value="g7">Grade 7</option>
-                <option value="g8">Grade 8</option>
-                <option value="g9">Grade 9</option>
-                <option value="g10">Grade 10</option>
-                <option value="g11">Grade 11</option>
-                <option value="g12">Grade 12</option>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
             </select><br><br>
 
-            <input type="radio" id="intern" name="internExtern" required>
+            <input type="radio" id="intern" name="internExtern" value="Intern" required>
             <label for="intern">Intern</label>
-            <input type="radio" id="extern" name="internExtern" required>
+            <input type="radio" id="extern" name="internExtern" value="Extern" required>
             <label for="Extern">Extern</label><br><br>
 
             <label for="preferredOrganization">Preferred Organization:</label>
-            <select id="preferredOrganization" required onblur="noGivenInput(this)">
+            <select id="preferredOrganization" required onblur="noGivenInput(this)" name="preferredOrganization">
                 <option value="" disabled selected hidden>Select organization</option>
-                <option value="labuyo">Labuyo</option>
-                <option value="alianti">Alianti</option>
-                <option value="ellipsis">Ellipsis</option>
-                <option value="flux">Flux</option>
-                <option value="celluloid">Celluloid</option>
+                <option value="Labuyo">Labuyo</option>
+                <option value="Alianti">Alianti</option>
+                <option value="Ellipsis">Ellipsis</option>
+                <option value="Flux">Flux</option>
+                <option value="Celluloid">Celluloid</option>
             </select><br><br>
         </fieldset>
 
         <fieldset>
             <legend>Why do you want to join this organization?</legend>
-            <br><textarea id="reasonText" placeholder="Type your reason here..." required onblur="noGivenInput(this)"></textarea><br><br>
+            <br><textarea id="reasonText" placeholder="Type your reason here..." required onblur="noGivenInput(this)" name="reason"></textarea><br><br>
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
         </fieldset>
@@ -63,6 +64,8 @@
     <script>
         const form = document.getElementById("studentForm");
         const reset = document.querySelector("button[type='reset']");
+        let signUps = JSON.parse(localStorage.getItem("signUps")) || [];
+        console.log("Loaded Sign-Ups:", signUps);
 
         form.addEventListener("submit", function(event) {
             event.preventDefault();
@@ -70,6 +73,15 @@
             let submit = confirm("Are you sure you want to submit the form?");
             
             if (submit) {
+                const formData = new FormData(form);
+                const studentData = {};
+                for (let [key, value] of formData.entries()) {
+                    studentData[key] = value;
+                }
+                signUps.push(studentData);
+                localStorage.setItem("signUps", JSON.stringify(signUps));
+                console.log("Current Sign-Ups:", signUps);
+
                 alert("Form submitted successfully!");
                 return;
             }
